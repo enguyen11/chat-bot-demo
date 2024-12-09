@@ -1,0 +1,86 @@
+.chat-label {
+    margin: 0; 
+    border: 0.5px solid forestgreen; 
+    background: forestgreen;
+    color: white;
+    text-align: center;
+}
+
+.chat {
+    background: white;
+    position: fixed;
+    right: 40px;
+    bottom: 50px;
+    width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+    overflow: hidden; 
+}
+
+.chat .chatbox {
+    height: 400px;
+    overflow-y: auto;
+}
+
+.icon {
+    align-self: flex-end;
+    height: 32px;
+    width: 32px;
+    color: whitesmoke;
+    background-color: forestgreen;
+    align-content: center;
+    text-align: center;
+    line-height: 32px;
+    margin: 0px 10px 17px 0px;
+    border-radius: 5px;
+}
+.chat .chat-msg {
+    display: flex;
+}
+
+.chat .chat-msg p{
+    color: black;
+    max-width: 75%;
+    font-size: 0.95rem;
+    padding: 12px 16px;
+    background: #f2f2f2;
+    border-radius: 7px;
+}
+
+.chat .user-msg p{
+    color: white;
+    background: forestgreen;
+}
+
+
+.chat .user-msg {
+    padding-right: 10px;
+    justify-content: flex-end;
+}
+
+.chat .chat-input  {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    bottom: 0px;
+    background: white;
+    padding: 5px 20px;
+    border-top: 1px solid black;
+}
+
+.chat .chat-input textarea {
+    height: 40px;
+    width: 80%;
+    border: none;
+    font-size: 0.95rem;
+    resize: none;
+    outline: none;
+    padding: 16px 15px 16px 0px;
+}
+
+.chat-input span {
+    color: forestgreen;
+    font-size: 1.2rem;
+    align-content: center;
+    text-align: center;
+}
