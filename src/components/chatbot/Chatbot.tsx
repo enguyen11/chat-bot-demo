@@ -8,6 +8,9 @@ import { ChangeEvent, useState } from "react";
 function Chatbot() {
     const [chatOpen, setChatOpen] = useState(false);
     const [outgoingMsg, setOutgoingMsg] = useState("");
+    const [messages, setMessages] = useState([{ sender: "bot", text: "Hi there, how may I help you?" }]);
+
+    const sendBtnVisibility = document.getElementById('send-btn');
 
     const handleChatToggle = () => {
         setChatOpen(!chatOpen);
@@ -15,10 +18,18 @@ function Chatbot() {
 
     const handleOutgoingMsg = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setOutgoingMsg(e.target.value);
-        const sendBtnVisibility = document.getElementById('send-btn');
+
         if (e.target.value.trim().length !== 0 && sendBtnVisibility !== null) {
             sendBtnVisibility.style.visibility = 'visible';
         }else if (sendBtnVisibility !== null) {
+            sendBtnVisibility.style.visibility = 'hidden';
+        }
+    }
+
+    const handleSendMsg = () => {
+        if (outgoingMsg.trim() && sendBtnVisibility !== null) {
+            setMessages([...messages, { sender: "user", text: outgoingMsg }]); 
+            setOutgoingMsg(""); 
             sendBtnVisibility.style.visibility = 'hidden';
         }
     }
@@ -30,20 +41,19 @@ function Chatbot() {
                         <h2>Chat</h2>
                     </header>
                     <ul className="chatbox">
-                        <li className="chat-msg chatbot-msg">
-                            <span className="icon"><FaRobot /></span>
-                            <p>Hi there, how may I help you? <br/> Hello World</p>
-                        </li>
-                        <li className="chat-msg user-msg">
-                            <p>Something something something</p>
-                        </li>
+                        {messages.map((msg, index) => (
+                            <li key={index} className={`chat-msg ${msg.sender}-msg`}>
+                                {msg.sender === "bot" && <span className="icon"><FaRobot /></span>}
+                            <p>{msg.text}</p>
+                            </li>
+                        ))}
                     </ul>
                     <div className="chat-input">
                         <textarea placeholder="Enter your message here..." required 
                         value={outgoingMsg} onChange={(e) => handleOutgoingMsg(e)}>
 
                         </textarea>
-                        <span id="send-btn"><IoMdSend /></span>
+                        <span id="send-btn" onClick={() => {handleSendMsg()}}><IoMdSend /></span>
                     </div>
                 </div>
             }
