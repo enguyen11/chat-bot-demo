@@ -4,6 +4,7 @@ import './index.css';
 import { CiChat1 } from "react-icons/ci";
 import { IoCloseSharp } from "react-icons/io5";
 import { ChangeEvent, useState } from "react";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 function Chatbot() {
     const [chatOpen, setChatOpen] = useState(false);
@@ -11,6 +12,9 @@ function Chatbot() {
     const [messages, setMessages] = useState([{ sender: "bot", text: "Hi there, how may I help you?" }]);
 
     const sendBtnVisibility = document.getElementById('send-btn');
+
+    const genAI = new GoogleGenerativeAI("AIzaSyCsBHz2uRG0hHJ3AHIQ_VbZ55avK8VdEwY");
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const handleChatToggle = () => {
         setChatOpen(!chatOpen);
@@ -26,13 +30,32 @@ function Chatbot() {
         }
     }
 
-    const handleSendMsg = () => {
+    const handleSendMsg = async () => {
         if (outgoingMsg.trim() && sendBtnVisibility !== null) {
-            setMessages([...messages, { sender: "user", text: outgoingMsg }]); 
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                { sender: "user", text: outgoingMsg }
+            ]);
             setOutgoingMsg(""); 
             sendBtnVisibility.style.visibility = 'hidden';
+    
+            await generateResponse();
         }
-    }
+    };
+    
+    const generateResponse = async () => {
+        try {
+            const result = await model.generateContent(outgoingMsg);
+            const botResponse = result.response.text(); 
+            setMessages((prevMessages) => [
+                ...prevMessages, 
+                { sender: "bot", text: botResponse }
+            ]);
+        } catch (error) {
+            console.error("Error generating response:", error);
+        }
+    };
+    
     return (
         <>
             { chatOpen &&
@@ -53,7 +76,9 @@ function Chatbot() {
                         value={outgoingMsg} onChange={(e) => handleOutgoingMsg(e)}>
 
                         </textarea>
-                        <span id="send-btn" onClick={() => {handleSendMsg()}}><IoMdSend /></span>
+                        <span id="send-btn" onClick={() => {
+                            handleSendMsg();
+                        }}><IoMdSend /></span>
                     </div>
                 </div>
             }

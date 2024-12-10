@@ -32,10 +32,12 @@
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
     overflow: hidden; 
+    
 }
 
 .chat .chatbox {
     height: 400px;
+    padding-bottom: 60px;
     overflow-y: auto;
 }
 
@@ -53,6 +55,7 @@
 }
 .chat .chat-msg {
     display: flex;
+    padding-right: 10px;
     margin-bottom: -3px;
 }
 
@@ -72,7 +75,6 @@
 
 
 .chat .user-msg {
-    padding-right: 10px;
     justify-content: flex-end;
 }
 
