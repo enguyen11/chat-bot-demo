@@ -6,11 +6,28 @@
     text-align: center;
 }
 
+.toggle-chat-btn {
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    border-radius: 50%;
+    color: white;
+    background: forestgreen;
+    border: none;
+    font-size: 1.5rem;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 10px; 
+    margin: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
 .chat {
     background: white;
     position: fixed;
     right: 40px;
-    bottom: 50px;
+    bottom: 100px;
     width: 350px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
@@ -36,6 +53,7 @@
 }
 .chat .chat-msg {
     display: flex;
+    margin-bottom: -3px;
 }
 
 .chat .chat-msg p{
@@ -69,7 +87,7 @@
 }
 
 .chat .chat-input textarea {
-    height: 40px;
+    height: 30px;
     width: 80%;
     border: none;
     font-size: 0.95rem;
@@ -83,4 +101,5 @@
     font-size: 1.2rem;
     align-content: center;
     text-align: center;
+    visibility: hidden;
 }
