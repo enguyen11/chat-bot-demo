@@ -6,6 +6,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import { ChangeEvent, useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+
 function Chatbot() {
     const [chatOpen, setChatOpen] = useState(false);
     const [outgoingMsg, setOutgoingMsg] = useState("");
@@ -13,7 +14,8 @@ function Chatbot() {
 
     const sendBtnVisibility = document.getElementById('send-btn');
 
-    const genAI = new GoogleGenerativeAI("AIzaSyCsBHz2uRG0hHJ3AHIQ_VbZ55avK8VdEwY");
+    const apiKey = import.meta.env.VITE_AI_API_BASE;
+    const genAI = new GoogleGenerativeAI(`${apiKey}`);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const handleChatToggle = () => {
